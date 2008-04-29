@@ -1,8 +1,8 @@
 -- MySQL dump 10.9
 --
--- Host: 10.2.70.105    Database: bugzilla_org_vendordb
+-- Host: localhost    Database: bugzilla_org_vendordb
 -- ------------------------------------------------------
--- Server version	4.1.20-log
+-- Server version   4.1.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,6 +30,7 @@ CREATE TABLE `vendors` (
   `approved` tinyint(4) NOT NULL default '0',
   `country` tinytext,
   `region` tinytext,
+  `notes` mediumtext,
   PRIMARY KEY  (`vID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
