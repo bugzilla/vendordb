@@ -1,38 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-  <title>Bugzilla Vendor Database</title>
-  <link rel="icon" href="http://www.bugzilla.org/img/bugzilla_icon.png" type="image/png">
-  <link rel="stylesheet" type="text/css" href="http://www.mozilla.org/css/print.css" media="print">
-  <link rel="stylesheet" type="text/css" href="http://www.mozilla.org/css/base/content.css" media="all">
-  <link rel="stylesheet" type="text/css" href="http://www.mozilla.org/css/cavendish/content.css" title="Cavendish" media="all">
-  <link rel="stylesheet" type="text/css" href="http://www.mozilla.org/css/base/template.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="http://www.bugzilla.org/css/bugzilla.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="http://www.mozilla.org/css/cavendish/home.css" title="Cavendish" media="screen">
-</head>
-<body>
-<form method="POST">
-  <p><b>Selected region:</b>
-   <select name="region">
-    [% FOR reg IN regionlist %]
-     <option value="[% reg FILTER html %]" [% "selected" IF region == reg %]>[% reg FILTER html %]</option>
-    [% END %]
-   </select>
-   <input type="submit" value="Go">
-  </p>
-</form>
-<ul>
-  [% FOR vendor IN vendors %]
-  <li><p><b>Name:</b> [% vendor.name FILTER html %]<br>
+var regions = ['[% regions.join("','") %]'];
+
+[% SET vendor_text = '' %]
+
+[% FOR vendor IN vendors %]
+  [% li_text = BLOCK %]
+    <li class="[% vendor.region FILTER html %]">
+      <b>Name:</b> [% vendor.name FILTER html %]
+      [% IF vendor.contributor %]
+        <img src="../favicon.ico" alt="(contributor)" title="Bugzilla Contributor" />
+      [% END %]<br>
       [% IF vendor.website %]<b>Website:</b> <a href="[% vendor.website FILTER html %]" target="_blank">[% vendor.website FILTER html %]</a><br>[% END %]
       [% IF vendor.services %]<b>Services:</b> [% vendor.services FILTER html %]<br>[% END %]
       [% IF vendor.location %]<b>Primary Location:</b> [% vendor.location FILTER html %]<br>[% END %]
       [% IF vendor.willwork %]<b>Will Work:</b> [% vendor.willwork FILTER html %]<br>[% END %]
       [% IF vendor.contact %]<b>Contact:</b> [% vendor.contact %]<br>[% END %]
       [% IF vendor.comment %]<b>Comment:</b> [% vendor.comment %]<br>[% END %]
-      </p>
-  </li>
+    </li>
   [% END %]
-</ul>
-</body>
-</html>
+  [% SET vendor_text = vendor_text _ li_text %]
+[% END %]
+
+vendors = '[% vendor_text FILTER js %]';
