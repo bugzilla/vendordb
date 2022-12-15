@@ -7,7 +7,7 @@ var regions = ['[% regions.join("','") %]'];
     <li class="[% vendor.region FILTER html %]">
       <b>Name:</b> [% vendor.name FILTER html %]
       [% IF vendor.contributor %]
-        <img src="../favicon.ico" alt="(contributor)" title="Bugzilla Contributor" />
+        <span class="bugzilla_contributor">(contributor)</span>
       [% END %]<br>
       [% IF vendor.website %]<b>Website:</b> <a href="[% vendor.website FILTER html %]" target="_blank">[% vendor.website FILTER html %]</a><br>[% END %]
       [% IF vendor.services %]<b>Services:</b> [% vendor.services FILTER html %]<br>[% END %]
